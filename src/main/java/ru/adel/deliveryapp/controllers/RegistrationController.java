@@ -15,7 +15,7 @@ import ru.adel.deliveryapp.dto.AuthenticationDTO;
 import ru.adel.deliveryapp.dto.CustomerDTO;
 import ru.adel.deliveryapp.models.Customer;
 import ru.adel.deliveryapp.security.JWTUtil;
-import ru.adel.deliveryapp.services.RegistrationService;
+import ru.adel.deliveryapp.services.impl.RegistrationServiceImpl;
 import ru.adel.deliveryapp.util.valid.AuthValidator;
 
 import javax.validation.Valid;
@@ -29,7 +29,7 @@ import static ru.adel.deliveryapp.util.ErrorsUtil.returnErrorsToClient;
 @RequestMapping("/auth")
 public class RegistrationController {
 
-    private final RegistrationService registrationService;
+    private final RegistrationServiceImpl registrationService;
     private final AuthValidator authValidator;
     private final JWTUtil jwtUtil;
     private final ModelMapper modelMapper;
@@ -37,7 +37,7 @@ public class RegistrationController {
 
 
 
-    public RegistrationController(RegistrationService registrationService, AuthValidator authValidator, JWTUtil jwtUtil, ModelMapper modelMapper, AuthenticationManager authenticationManager) {
+    public RegistrationController(RegistrationServiceImpl registrationService, AuthValidator authValidator, JWTUtil jwtUtil, ModelMapper modelMapper, AuthenticationManager authenticationManager) {
         this.registrationService = registrationService;
         this.authValidator = authValidator;
         this.jwtUtil = jwtUtil;

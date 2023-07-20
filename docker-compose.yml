@@ -1,0 +1,24 @@
+version: '3'
+services:
+  pg:
+    image: postgres
+    restart: always
+    ports:
+      - "5232:5432"
+    environment:
+      POSTGRES_DB: deliveries_app_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: mamamama
+    volumes:
+      - ./docker-scripts/init.sql:/docker-entrypoint-initdb.d/init.sql
+  app:
+    container_name: testJavaApplication
+    build: .
+    ports:
+      - "8080:8080"
+    depends_on:
+      - pg
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://pg:5432/deliveries_app_db
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: mamamama

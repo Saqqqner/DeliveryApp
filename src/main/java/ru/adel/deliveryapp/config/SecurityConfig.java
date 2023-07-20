@@ -48,8 +48,8 @@ public class SecurityConfig {
         http
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/api/products/update/**", "/api/products/delete/**", "/api/products/create").hasRole("ADMIN")
-                .antMatchers("/auth/*").permitAll()
+                .antMatchers("/api/products/update/**", "/api/products/delete/**", "/api/products/create","/api/customers").hasRole("ADMIN")
+                .antMatchers("/auth/*","/api/products").permitAll()
                 .anyRequest().hasAnyRole("USER", "ADMIN")
                 .and()
                 .formLogin()

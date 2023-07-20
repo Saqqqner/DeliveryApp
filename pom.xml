@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>ru.adel</groupId>
-	<artifactId>deliveryapp</artifactId>
+	<artifactId>DeliveryApp</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>deliveryapp</name>
+	<name>DeliveryApp</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
 		<java.version>17</java.version>
@@ -100,7 +100,6 @@
 			<artifactId>java-jwt</artifactId>
 			<version>3.18.1</version>
 		</dependency>
-
 
 
 

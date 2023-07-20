@@ -32,7 +32,7 @@ public class CustomerController {
         this.passwordEncoder = passwordEncoder;
     }
 
-    @GetMapping
+    @GetMapping()
     public ResponseEntity<List<CustomerDTO>> getCustomers() {
         List<Customer> customers = customerServiceImpl.getAllCustomers();
         if (customers.isEmpty()) {
@@ -69,7 +69,7 @@ public class CustomerController {
 
         Customer updatedCustomer = modelMapper.map(customerDTO, Customer.class);
 
-        // Примените изменения только к определенным полям
+        // Применять  изменения только к определенным полям
         if (customerDTO.getName() != null) {
             existingCustomer.setName(updatedCustomer.getName());
         }
@@ -95,8 +95,10 @@ public class CustomerController {
         return ResponseEntity.ok(updatedCustomerDTO);
     }
 
-    @DeleteMapping("/{customerId}")
-    public ResponseEntity<Void> deleteCustomer(@PathVariable Long customerId) {
+    @DeleteMapping()
+    public ResponseEntity<Void> deleteCustomer(Authentication authentication) {
+        CustomerDetails customerDetails = (CustomerDetails) authentication.getPrincipal();
+        Long customerId = customerDetails.getCustomer().getId();
         customerServiceImpl.deleteCustomer(customerId);
         return ResponseEntity.noContent().build();
     }
