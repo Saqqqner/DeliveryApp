@@ -8,10 +8,16 @@ import java.util.Set;
 
 public interface ProductService {
     List<Product> getAllProducts();
+
     Product getProductById(Long id);
+
     List<Product> getProductsByIds(Set<Long> productIds);
+
     Product createProduct(Product product);
+
     Product updateProduct(Long id, Product product);
+
     void deleteProduct(Long id);
+
     void updateProductStock(List<OrderItem> orderItems);
 }

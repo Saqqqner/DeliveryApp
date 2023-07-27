@@ -34,8 +34,7 @@ public class Customer {
     private String email;
 
     @NotEmpty(message = "Адрес необходим для заполнения")
-    @Pattern(regexp="^[\\p{L}\\d\\s-,]+?,\\s*[\\p{L}\\d\\s-,]+?,\\s*[\\p{L}\\d\\s-,]+?,\\s*[\\p{L}\\d]+(?:\\s*[\\p{L}\\d]+)?$",
-            message="Address must be in the format: Country, City, Street, House number, Apartment number")
+    @Pattern(regexp = "^[\\p{L}\\d\\s-,]+?,\\s*[\\p{L}\\d\\s-,]+?,\\s*[\\p{L}\\d\\s-,]+?,\\s*[\\p{L}\\d]+(?:\\s*[\\p{L}\\d]+)?$", message = "Address must be in the format: Country, City, Street, House number, Apartment number")
     private String address;
 
     @Column(name = "password")
@@ -45,10 +44,8 @@ public class Customer {
     @Column(name = "role")
     private CustomerRole role;
 
-    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Order> orders = new ArrayList<>();
-
-
 
 
 }

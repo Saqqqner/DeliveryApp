@@ -36,7 +36,6 @@ public class RegistrationController {
     private final AuthenticationManager authenticationManager;
 
 
-
     public RegistrationController(RegistrationServiceImpl registrationService, AuthValidator authValidator, JWTUtil jwtUtil, ModelMapper modelMapper, AuthenticationManager authenticationManager) {
         this.registrationService = registrationService;
         this.authValidator = authValidator;
@@ -48,8 +47,8 @@ public class RegistrationController {
     @PostMapping("/registration")
     public Map<String, String> performRegistration(@RequestBody @Valid CustomerDTO customerDTO,
                                                    BindingResult bindingResult) {
-        Customer customer = modelMapper.map(customerDTO,Customer.class);
-        authValidator.validate(customer,bindingResult);
+        Customer customer = modelMapper.map(customerDTO, Customer.class);
+        authValidator.validate(customer, bindingResult);
         if (bindingResult.hasErrors()) {
             returnErrorsToClient(bindingResult);
         }
@@ -60,6 +59,7 @@ public class RegistrationController {
 
         return Collections.singletonMap("jwt-token", token);
     }
+
     @PostMapping("/login")
     public Map<String, String> performLogin(@RequestBody AuthenticationDTO authenticationDTO) {
         UsernamePasswordAuthenticationToken authInputToken =

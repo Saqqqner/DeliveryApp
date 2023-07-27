@@ -1,5 +1,6 @@
 package ru.adel.deliveryapp.services.impl;
 
+import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -10,17 +11,13 @@ import ru.adel.deliveryapp.services.RegistrationService;
 import ru.adel.deliveryapp.util.MyException;
 
 @Service
+@RequiredArgsConstructor
 public class RegistrationServiceImpl implements RegistrationService {
 
     private final CustomerRepository customerRepository;
     private final PasswordEncoder passwordEncoder;
     private final ModelMapper modelMapper;
 
-    public RegistrationServiceImpl(CustomerRepository customerRepository, PasswordEncoder passwordEncoder, ModelMapper modelMapper) {
-        this.customerRepository = customerRepository;
-        this.passwordEncoder = passwordEncoder;
-        this.modelMapper = modelMapper;
-    }
 
     @Override
     public void registerCustomer(Customer customer) {

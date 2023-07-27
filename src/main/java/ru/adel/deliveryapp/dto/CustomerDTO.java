@@ -5,7 +5,10 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.validation.constraints.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -22,8 +25,8 @@ public class CustomerDTO {
     private String email;
 
     @NotNull(message = "Адрес необходим для заполнения")
-    @Pattern(regexp="^[\\p{L}\\d\\s-,]+?,\\s*[\\p{L}\\d\\s-,]+?,\\s*[\\p{L}\\d\\s-,]+?,\\s*[\\p{L}\\d]+(?:\\s*[\\p{L}\\d]+)?$",
-            message="Address must be in the format: Country, City, Street, House number, Apartment number")
+    @Pattern(regexp = "^[\\p{L}\\d\\s-,]+?,\\s*[\\p{L}\\d\\s-,]+?,\\s*[\\p{L}\\d\\s-,]+?,\\s*[\\p{L}\\d]+(?:\\s*[\\p{L}\\d]+)?$",
+            message = "Address must be in the format: Country, City, Street, House number, Apartment number")
     private String address;
 
     @NotBlank

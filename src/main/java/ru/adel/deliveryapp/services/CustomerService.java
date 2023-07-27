@@ -7,9 +7,12 @@ import java.util.Optional;
 
 public interface CustomerService {
     List<Customer> getAllCustomers();
+
     Customer getCustomerById(Long id);
+
     Customer updateCustomer(Long id, Customer customer);
+
     void deleteCustomer(Long id);
 
-    Optional<Customer>  getCustomerByEmail(String email);
+    Optional<Customer> getCustomerByEmail(String email);
 }

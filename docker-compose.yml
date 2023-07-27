@@ -9,8 +9,8 @@ services:
       POSTGRES_DB: deliveries_app_db
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: mamamama
-    volumes:
-      - ./docker-scripts/init.sql:/docker-entrypoint-initdb.d/init.sql
+#    volumes:
+#      - ./docker-scripts/init.sql:/docker-entrypoint-initdb.d/init.sql
   app:
     container_name: testJavaApplication
     build: .

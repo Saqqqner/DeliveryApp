@@ -1,6 +1,6 @@
 package ru.adel.deliveryapp.services.impl;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.adel.deliveryapp.models.OrderItem;
@@ -10,21 +10,16 @@ import ru.adel.deliveryapp.services.ProductService;
 import ru.adel.deliveryapp.util.InsufficientStockException;
 
 import javax.persistence.EntityNotFoundException;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
 @Service
-@Transactional(readOnly = true)
+@RequiredArgsConstructor
 public class ProductServiceImpl implements ProductService {
 
     private final ProductRepository productRepository;
 
-    @Autowired
-    public ProductServiceImpl(ProductRepository productRepository) {
-        this.productRepository = productRepository;
-    }
 
     public List<Product> getAllProducts() {
         return productRepository.findAll();
@@ -34,6 +29,7 @@ public class ProductServiceImpl implements ProductService {
         return productRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Product not found with id: " + id));
     }
+
     public List<Product> getProductsByIds(Set<Long> productIds) {
         return productRepository.findAllById(productIds);
     }
@@ -46,7 +42,7 @@ public class ProductServiceImpl implements ProductService {
     @Transactional
     public Product updateProduct(Long id, Product product) {
         Product existingProduct = getProductById(id);
-        enrichProduct(existingProduct,product);
+        enrichProduct(existingProduct, product);
         return productRepository.save(existingProduct);
     }
 
@@ -54,6 +50,7 @@ public class ProductServiceImpl implements ProductService {
     public void deleteProduct(Long id) {
         productRepository.deleteById(id);
     }
+
     @Transactional
     public void updateProductStock(List<OrderItem> orderItems) {
         List<Product> updatedProducts = new ArrayList<>();
@@ -77,7 +74,7 @@ public class ProductServiceImpl implements ProductService {
         productRepository.saveAll(updatedProducts);
     }
 
-    private void enrichProduct(Product existingProduct ,Product newProduct){
+    private void enrichProduct(Product existingProduct, Product newProduct) {
         if (newProduct.getName() != null) {
             existingProduct.setName(newProduct.getName());
         }
