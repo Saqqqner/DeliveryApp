@@ -13,27 +13,27 @@ import ru.adel.deliveryapp.models.OrderItem;
 @SpringBootApplication
 public class DeliveryAppApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(DeliveryAppApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(DeliveryAppApplication.class, args);
+    }
 
-	@Bean
-	public ModelMapper modelMapper() {
-		ModelMapper modelMapper = new ModelMapper();
-		modelMapper.getConfiguration()
-				.setMatchingStrategy(MatchingStrategies.STRICT)
-				.setSkipNullEnabled(true);
+    @Bean
+    public ModelMapper modelMapper() {
+        ModelMapper modelMapper = new ModelMapper();
+        modelMapper.getConfiguration()
+                .setMatchingStrategy(MatchingStrategies.STRICT)
+                .setSkipNullEnabled(true);
 
-		modelMapper.createTypeMap(Order.class, OrderDTO.class)
-				.addMapping(src -> src.getCustomer().getId(), OrderDTO::setCustomerId)
-				.addMapping(Order::getOrderItems, OrderDTO::setOrderItems);
+        modelMapper.createTypeMap(Order.class, OrderDTO.class)
+                .addMapping(src -> src.getCustomer().getId(), OrderDTO::setCustomerId)
+                .addMapping(Order::getOrderItems, OrderDTO::setOrderItems);
 
-		modelMapper.createTypeMap(OrderItem.class, OrderItemDTO.class)
-				.addMapping(OrderItem::getId, OrderItemDTO::setId)
-				.addMapping(orderItem -> orderItem.getOrder().getId(), OrderItemDTO::setOrderId)
-				.addMapping(orderItem -> orderItem.getProduct().getId(), OrderItemDTO::setProductId)
-				.addMapping(OrderItem::getQuantity, OrderItemDTO::setQuantity);
+        modelMapper.createTypeMap(OrderItem.class, OrderItemDTO.class)
+                .addMapping(OrderItem::getId, OrderItemDTO::setId)
+                .addMapping(orderItem -> orderItem.getOrder().getId(), OrderItemDTO::setOrderId)
+                .addMapping(orderItem -> orderItem.getProduct().getId(), OrderItemDTO::setProductId)
+                .addMapping(OrderItem::getQuantity, OrderItemDTO::setQuantity);
 
-		return modelMapper;
-	}
+        return modelMapper;
+    }
 }

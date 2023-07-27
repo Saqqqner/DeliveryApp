@@ -6,8 +6,6 @@ import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 import ru.adel.deliveryapp.dto.OrderItemDTO;
 
-import java.math.BigDecimal;
-
 @Component
 public class OrderItemDTOValidator implements Validator {
 
@@ -26,6 +24,6 @@ public class OrderItemDTOValidator implements Validator {
             errors.rejectValue(QUANTITY_FIELD, "field.invalid");
         }
 
-        }
     }
+}
 

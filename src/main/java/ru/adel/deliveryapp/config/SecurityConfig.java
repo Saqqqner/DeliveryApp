@@ -1,6 +1,5 @@
 package ru.adel.deliveryapp.config;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -34,8 +33,6 @@ public class SecurityConfig {
     }
 
 
-
-
     @Bean
     protected SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         //  Конфигурация самого Spring Security
@@ -45,30 +42,31 @@ public class SecurityConfig {
         AuthenticationManager authenticationManager = authenticationManagerBuilder.build();
         return
 
-        http
-                .csrf().disable()
-                .authorizeRequests()
-                .antMatchers("/api/products/update/**", "/api/products/delete/**", "/api/products/create","/api/customers").hasRole("ADMIN")
-                .antMatchers("/auth/*","/api/products").permitAll()
-                .anyRequest().hasAnyRole("USER", "ADMIN")
-                .and()
-                .formLogin()
-                .loginPage("/auth/login")
-                .loginProcessingUrl("/auth/process_login")
-                .defaultSuccessUrl("/api/products", true)
-                .failureUrl("/api/products")
-                .and()
-                .logout()
-                .logoutUrl("/auth/logout")
-                .logoutSuccessUrl("/auth/login")
-                .and()
-                .sessionManagement()
-                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                .and()
-                .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
-                .authenticationManager(authenticationManager)
-                .build();
+                http
+                        .csrf().disable()
+                        .authorizeRequests()
+                        .antMatchers("/api/products/update/**", "/api/products/delete/**", "/api/products/create", "/api/customers").hasRole("ADMIN")
+                        .antMatchers("/auth/*", "/api/products").permitAll()
+                        .anyRequest().hasAnyRole("USER", "ADMIN")
+                        .and()
+                        .formLogin()
+                        .loginPage("/auth/login")
+                        .loginProcessingUrl("/auth/process_login")
+                        .defaultSuccessUrl("/api/products", true)
+                        .failureUrl("/api/products")
+                        .and()
+                        .logout()
+                        .logoutUrl("/auth/logout")
+                        .logoutSuccessUrl("/auth/login")
+                        .and()
+                        .sessionManagement()
+                        .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                        .and()
+                        .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
+                        .authenticationManager(authenticationManager)
+                        .build();
     }
+
     @Bean
     public AuthenticationManager authenticationManager(HttpSecurity http, CustomerDetailsServiceImpl customerDetailsService)
             throws Exception {

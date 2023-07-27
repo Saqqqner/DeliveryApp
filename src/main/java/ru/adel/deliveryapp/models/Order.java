@@ -30,6 +30,6 @@ public class Order {
     @NotNull(message = "Дата доставки необходима для заполнения")
     private LocalDate orderDate;
 
-    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<OrderItem> orderItems = new ArrayList<>();
 }

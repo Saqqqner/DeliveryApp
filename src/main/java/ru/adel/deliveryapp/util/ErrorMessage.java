@@ -5,7 +5,7 @@ public class ErrorMessage {
     private String message;
     private String fieldName;
 
-    public ErrorMessage(String fieldName , String message) {
+    public ErrorMessage(String fieldName, String message) {
         this.fieldName = fieldName;
         this.message = message;
     }

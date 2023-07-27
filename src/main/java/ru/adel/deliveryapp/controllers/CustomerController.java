@@ -1,5 +1,6 @@
 package ru.adel.deliveryapp.controllers;
 
+import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,18 +20,13 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/customers")
+@RequiredArgsConstructor
 public class CustomerController {
     private final CustomerServiceImpl customerServiceImpl;
     private final ModelMapper modelMapper;
     private final CustomerValidator customerValidator;
     private final PasswordEncoder passwordEncoder;
 
-    public CustomerController(CustomerServiceImpl customerServiceImpl, ModelMapper modelMapper, CustomerValidator customerValidator, PasswordEncoder passwordEncoder) {
-        this.customerServiceImpl = customerServiceImpl;
-        this.modelMapper = modelMapper;
-        this.customerValidator = customerValidator;
-        this.passwordEncoder = passwordEncoder;
-    }
 
     @GetMapping()
     public ResponseEntity<List<CustomerDTO>> getCustomers() {
@@ -43,6 +39,7 @@ public class CustomerController {
                 .collect(Collectors.toList());
         return ResponseEntity.ok(customerDTOs);
     }
+
     @GetMapping("/{customerId}")
     public ResponseEntity<CustomerDTO> getCustomerById(@PathVariable Long customerId) {
         Customer customer = customerServiceImpl.getCustomerById(customerId);
@@ -55,7 +52,7 @@ public class CustomerController {
 
 
     @PutMapping()
-    public ResponseEntity<?> updateCustomer(Authentication authentication, @RequestBody CustomerDTO customerDTO,BindingResult bindingResult) {
+    public ResponseEntity<?> updateCustomer(Authentication authentication, @RequestBody CustomerDTO customerDTO, BindingResult bindingResult) {
         CustomerDetails customerDetails = (CustomerDetails) authentication.getPrincipal();
         Customer authenticatedCustomer = customerDetails.getCustomer();
         Long customerId = authenticatedCustomer.getId();

@@ -2,7 +2,6 @@ package ru.adel.deliveryapp.util.valid;
 
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
-import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 import ru.adel.deliveryapp.models.Customer;
 
